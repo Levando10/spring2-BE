@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+    <style>
+        body { background-color: #f7f7f7; margin: 0; padding: 0; }
+        .container { width: 80%; margin: auto; background-color: #fff; padding: 20px; }
+        .header { background-color: #4CAF50; color: white; padding: 10px; text-align: center; }
+        .content { margin-top: 20px; }
+        .footer { background-color: #f1f1f1; text-align: center; padding: 10px; margin-top: 20px; }
+        p { line-height: 1.5; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>GLASSES</h1>
+    </div>
+    <div class="content">
+        <h2 th:text="'Xin chào ' + ${fullName}"></h2>
+        <p>Cảm ơn bạn đã mua sắm tại GLASSES.</p>
+        <p>Đơn hàng của bạn đã được xử lý thành công.</p>
+        <table>
+            <tr><td>Tổng số tiền: </td><td th:text="${totalPrice} +'vnd' "> vnd</td></tr>
+            <tr><td>Ngày thanh toán:</td><td th:text="${time}"></td></tr>
+        </table>
+        <p>Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ gì, xin vui lòng liên hệ qua email này hoặc gọi cho chúng tôi theo số 0982009465.</p>
+        <p>Trân trọng,<br>GLASSES</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Glasses. Tất cả các quyền đã được bảo hộ.</p>
+    </div>
+</div>
+</body>
+
+</html>
