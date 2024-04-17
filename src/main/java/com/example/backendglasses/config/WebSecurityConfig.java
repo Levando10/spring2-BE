@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                              .requestMatchers(HttpMethod.DELETE,("/product/")).hasRole("ADMIN")
                              .requestMatchers(HttpMethod.PUT,("/product/")).hasRole("ADMIN")
                              .requestMatchers(HttpMethod.POST,("/product/")).hasRole("ADMIN")
+                             .requestMatchers(HttpMethod.GET,("/admin/**")).hasRole("ADMIN")
                              .requestMatchers(HttpMethod.POST,("/account/changPassword")).permitAll()
                              .requestMatchers(HttpMethod.GET,("/account/information/{idAccount}")).permitAll()
 //

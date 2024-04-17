@@ -193,4 +193,25 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "            group by product.id\n" +
             "order by product.price desc",nativeQuery = true)
     Page<ProductDTO> searchWithParamGucciAndDior(Pageable pageable, String searchGucci, String searchDior);
+
+
+    @Query(value = "select product.id as idProduct,product.quantity as quantity, product.name as nameProduct, product.price as price,\n" +
+            "            manufacturer.name as nameFac, max(image_product.url_image) as imageMax, product.id as idProduct, category.name as nameCategory\n" +
+            "            from product\n" +
+            "            join image_product on image_product.product_image = product.id\n" +
+            "            join manufacturer on manufacturer.id = product.manufacturer_id\n" +
+            "            join category on category.id = product.category_id\n" +
+            "where  product.name like %:searchName%\n"+
+            "            group by product.id\n" +
+            "order by product.price desc",nativeQuery = true)
+    Page<ProductDTO> searchProductDTOManagement(Pageable pageable, String searchName);
+    @Query(value = "select product.id as idProduct, product.name as nameProduct, product.price as price, product.quantity as quantity,\n" +
+            "            manufacturer.name as nameFac, max(image_product.url_image) as imageMax, product.id as idProduct, category.name as nameCategory\n" +
+            "            from product\n" +
+            "            join image_product on image_product.product_image = product.id\n" +
+            "            join manufacturer on manufacturer.id = product.manufacturer_id\n" +
+            "            join category on category.id = product.category_id\n" +
+            "            group by product.id\n" +
+            "order by product.price desc",nativeQuery = true)
+    Page<ProductDTO> findAllProductDTOManagement(Pageable pageable);
 }

@@ -129,4 +129,14 @@ public class ProductService implements IProductService {
     public Page<Product> findAllByQuantityGreaterThan(Pageable pageable, Integer i) {
         return productRepository.findAllByQuantityGreaterThanAndIsDeletedFalse(pageable,i);
     }
+
+    @Override
+    public Page<ProductDTO> searchProductDTOManagement(Pageable pageable, String searchName) {
+        return productRepository.searchProductDTOManagement(pageable,searchName);
+    }
+
+    @Override
+    public Page<ProductDTO> findAllProductDTOManagement(Pageable pageable) {
+        return productRepository.findAllProductDTOManagement(pageable);
+    }
 }

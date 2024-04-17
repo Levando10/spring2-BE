@@ -50,4 +50,8 @@ public interface IProductService {
     void save(Product product);
 
     Page<Product> findAllByQuantityGreaterThan(Pageable pageable, Integer  integer);
+
+    Page<ProductDTO> searchProductDTOManagement(Pageable pageable, String searchName);
+
+    Page<ProductDTO> findAllProductDTOManagement(Pageable pageable);
 }

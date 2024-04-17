@@ -11,4 +11,5 @@ public interface CartDTO {
     Long getTotalPrice();
     LocalDateTime getOrderDay();
     String getAddressShip();
+    String getFullName();
 }
