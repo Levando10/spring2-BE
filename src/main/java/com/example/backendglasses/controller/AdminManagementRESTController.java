@@ -5,6 +5,7 @@ import com.example.backendglasses.model.User;
 import com.example.backendglasses.model.dto.ApiResponse;
 import com.example.backendglasses.model.dto.CartDTO;
 import com.example.backendglasses.model.dto.ProductDTO;
+import com.example.backendglasses.service.impl.IAccountService;
 import com.example.backendglasses.service.impl.IProductService;
 import com.example.backendglasses.service.impl.IShoppingCartItemService;
 import com.example.backendglasses.service.impl.IShoppingCartService;
@@ -30,6 +31,8 @@ public class AdminManagementRESTController {
     private IShoppingCartService iShoppingCartService;
     @Autowired
     private IShoppingCartItemService iShoppingCartItemService;
+    @Autowired
+    private IAccountService iAccountService;
 
     @GetMapping("/cart")
     public ResponseEntity<Object> managementHistoryCartOrder( @PageableDefault(size = 5) Pageable pageable){
@@ -66,6 +69,13 @@ public class AdminManagementRESTController {
         Page<ProductDTO> productDTOS = iProductService.findAllProductDTOManagement(pageable);
 
         return new ResponseEntity<>( productDTOS, HttpStatus.OK);
+
+    }
+    @GetMapping("/listAccount")
+    public ResponseEntity<Object> listAccount(){
+     List<User> userList = iAccountService.findAll();
+
+        return new ResponseEntity<>( userList, HttpStatus.OK);
 
     }
     @GetMapping("/searchProduct")

@@ -21,19 +21,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
     private final AccountRepository accountRepository;
+
     //user detail object
     @Bean
-    public UserDetailsService userDetailsService(){
-       return nameAccount -> {
-           Optional<User> optionalUser = accountRepository.findByNameAccount(nameAccount);
-           if (optionalUser.isPresent()){
-               return optionalUser.get();
-           } else {
-               throw new UsernameNotFoundException("Khong the tim user voi account name = " + nameAccount);
-           }
-       };
+    public UserDetailsService userDetailsService() {
+        return nameAccount -> {
+            Optional<User> optionalUser = accountRepository.findByNameAccount(nameAccount);
+            if (optionalUser.isPresent()) {
+                return optionalUser.get();
+            } else {
+                throw new UsernameNotFoundException("Khong the tim user voi account name = " + nameAccount);
+            }
+        };
     }
 
     @Bean

@@ -1,7 +1,9 @@
 package com.example.backendglasses.service.impl;
 
+import com.example.backendglasses.model.Role;
 import com.example.backendglasses.model.User;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 
@@ -20,4 +22,8 @@ public interface IAccountService {
     User findAccountByAccountIdAccount(Long idAccount);
 
     void save(User user);
+
+    User findAccountByRole(Role role);
+
+    List<User> findAll();
 }

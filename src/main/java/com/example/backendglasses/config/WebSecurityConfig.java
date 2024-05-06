@@ -40,6 +40,11 @@ public class WebSecurityConfig {
                              .requestMatchers(HttpMethod.DELETE,("/cart/**")).hasAnyRole("USER", "ADMIN")
                              .requestMatchers(HttpMethod.POST,("/payment/**")).hasAnyRole("USER", "ADMIN")
                              .requestMatchers(HttpMethod.GET,("/payment/**")).hasAnyRole("USER", "ADMIN")
+                             .requestMatchers(HttpMethod.GET,("/message/**")).hasAnyRole("USER", "ADMIN")
+
+//                             .requestMatchers(HttpMethod.GET,("/message/**")).hasAnyRole("USER", "ADMIN")
+
+
 //                             .anyRequest().authenticated()
 
                              .anyRequest().permitAll()

@@ -1,6 +1,7 @@
 package com.example.backendglasses.service;
 
 import com.example.backendglasses.config.JwtTokenUtil;
+import com.example.backendglasses.model.Role;
 import com.example.backendglasses.model.User;
 import com.example.backendglasses.repository.AccountRepository;
 import com.example.backendglasses.service.impl.IAccountService;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 
@@ -79,5 +81,15 @@ public class AccountService implements IAccountService {
     @Override
     public void save(User user) {
         accountRepository.save(user);
+    }
+
+    @Override
+    public User findAccountByRole(Role role) {
+        return accountRepository.findUserByRole(role);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return accountRepository.findAllAccountUser();
     }
 }

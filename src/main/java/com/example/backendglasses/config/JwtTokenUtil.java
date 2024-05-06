@@ -20,12 +20,12 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtTokenUtil {
 
-    public String generateToken(com.example.backendglasses.model.User user){
+    public String generateToken(com.example.backendglasses.model.User user) {
         long expirationTime = System.currentTimeMillis() + 86400000L * 10L;
-        Map<String,Object> claims = new HashMap<>();
+        Map<String, Object> claims = new HashMap<>();
         String se = "73608685541105edccb3ea757e3e6487d30f71977c74db789b5df252d85d598b";
         byte[] bytes = Decoders.BASE64.decode(se);
-        claims.put("nameAccount",user.getNameAccount());
+        claims.put("nameAccount", user.getNameAccount());
         try {
             String token = Jwts.builder()
                     .setClaims(claims)
@@ -34,20 +34,20 @@ public class JwtTokenUtil {
                     .signWith(Keys.hmacShaKeyFor(bytes), SignatureAlgorithm.HS256)
                     .compact();
             return token;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new InvalidParameterException("khong the tao ra  jwt token bi loi r: " + e.getMessage());
-
         }
 
     }
 
     public Key getSignKey() {
         String se = "73608685541105edccb3ea757e3e6487d30f71977c74db789b5df252d85d598b";
-      byte[] bytes = Decoders.BASE64.decode(se);
+        byte[] bytes = Decoders.BASE64.decode(se);
 
         return Keys.hmacShaKeyFor(bytes);
     }
-    public Claims extractAllClaims(String token){
+
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
@@ -55,9 +55,9 @@ public class JwtTokenUtil {
                 .getBody();
     }
 
-    public  <T> T extractClaim(String token, Function<Claims,T> claimsTResolver){
-     final Claims claims =  this.extractAllClaims(token);
-       return claimsTResolver.apply(claims);
+    public <T> T extractClaim(String token, Function<Claims, T> claimsTResolver) {
+        final Claims claims = this.extractAllClaims(token);
+        return claimsTResolver.apply(claims);
     }
 
     private Boolean isTokenExpired(String token) {
@@ -65,7 +65,7 @@ public class JwtTokenUtil {
         return expiration.before(new Date());
     }
 
-    public String extractUserName(String token){
+    public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
 
     }
@@ -74,7 +74,6 @@ public class JwtTokenUtil {
         final String username = extractUserName(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
 
 
 }

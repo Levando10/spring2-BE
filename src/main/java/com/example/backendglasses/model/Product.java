@@ -18,6 +18,7 @@ public class Product {
     private String description;
     private Double price;
     private int quantity;
+
     @ManyToOne
     @JoinColumn(name = "CategoryId",referencedColumnName = "id")
     private Category category;
